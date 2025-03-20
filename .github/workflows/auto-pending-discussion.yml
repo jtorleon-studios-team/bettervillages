@@ -1,0 +1,10 @@
+name: Pending Discussion
+run-name: ${{ github.actor }} - pending discussion
+on:
+  issue_comment:
+    types: [created]
+jobs:
+  run:
+    if: github.actor != github.event.issue.user.login && !contains(github.event.issue.labels.*.name, 'pending discussion')
+    uses: jtorleon-studios-team/.workflows/.github/workflows/auto-pending-discussion.yml@main
+    secrets: inherit
